@@ -13,12 +13,15 @@ app = Flask(__name__)
 app.secret_key = "MY_SUPER_SECRET_KEY"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-engine = create_engine('sqlite:///fizzBuzz.db')
+engine = create_engine('sqlite:///model.db')
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine, autoflush=False)
 session = DBSession()
 
 @app.route('/')
+def home():
+	return render_template('home.html')
+
 @app.route('/inventory')
 def inventory():
 	items = session.query(Product).all()
@@ -53,8 +56,9 @@ def login():
 			flash('Incorrect username/password combination')
 			return redirect(url_for('login'))
 
-
-
+@app.route("/signup")
+def signup():
+	return render_template("signup.html")
 
 if __name__ == '__main__':
 	app.run(debug=True)
