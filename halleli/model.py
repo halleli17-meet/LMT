@@ -29,9 +29,8 @@ class Video(Base):
 	name = Column(String(255))
 	makeup_area = Column(String(255))
 	video_url = (String(255))
-	photo_url = (String(255))
 	description = (String(255))
-	users = relationship("User", back_populates="videoAssociation")
+	usersID = relationship("User", back_populates="videoAssociation")
 
 class VideoAssociation(Base):
 	__tablename__ = 'videoAssociation'
